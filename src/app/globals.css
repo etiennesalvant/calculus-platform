@@ -1,0 +1,22 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Calculus Platform · Project lead and maintainer: Etienne Salvant. */
+html, body { background: #f6f5ef; color: #21372e; }
+body { font-family: Arial, Helvetica, sans-serif; }
+h1, h2, .editorial { font-family: Georgia, 'Times New Roman', serif; letter-spacing: -.025em; }
+button, a, input, select { -webkit-tap-highlight-color: transparent; }
+button, input, select { min-height: 36px; }
+:focus-visible { outline: 3px solid #b87929; outline-offset: 3px; }
+button:disabled { cursor: not-allowed; }
+.math-expression-block { overflow-x: auto; padding: .35rem 0; }
+.bg-white { background-color: #fffefa; }
+.hover\:bg-blue-700:hover { background-color: #114b39; }
+.hover\:bg-blue-100:hover { background-color: #d6e7db; }
+.text-slate-400 { color: #68756f; }
+.study-hero { background: #173e31; color: #fffdf5; position: relative; overflow: hidden; }
+.study-grid { background-image: linear-gradient(#ffffff0b 1px, transparent 1px), linear-gradient(90deg,#ffffff0b 1px,transparent 1px); background-size: 28px 28px; }
+.course-card { transition: border-color .15s, transform .15s; }
+.course-card:hover { border-color: #17634c; transform: translateY(-2px); }
+@media (prefers-reduced-motion: reduce) { *, *::before, *::after { transition: none !important; scroll-behavior: auto !important; } }
