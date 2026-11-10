@@ -2,6 +2,8 @@
 
 A self-paced mathematics workbench by **Etienne Salvant**.
 
+[Open the live demo](https://etiennesalvant.github.io/calculus-platform/)
+
 Work through algebra, calculus, differential equations, and linear algebra with
 short lessons, worked examples, practice questions, and visual explanations.
 The public demo runs entirely in the browser. No account or API key is required.

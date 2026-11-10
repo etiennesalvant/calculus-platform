@@ -6,7 +6,7 @@ import {
   TopicMasteryResult,
 } from "@/lib/types/curriculumTypes";
 
-// Turns a pile of right/wrong answers into one mastery score per topic.
+// Group diagnostic answers by topic before selecting a starting unit.
 function scoreDiagnosticByTopic(
   answerRecords: DiagnosticAnswerRecord[]
 ): TopicMasteryResult[] {
@@ -131,9 +131,9 @@ export function buildPlacementRecommendation(
         topicsToReviewFirst: topicsNeedingReview,
         topicsAlreadyStrong,
         summaryMessage:
-          `Your results look solid on ${topicsAlreadyStrong.length} topic(s), but ` +
-          `${topicsNeedingReview.length} topic(s) need a refresher. Starting in ` +
-          `${firstWeakSpot.course} will close the earliest gap first so nothing later builds on a shaky foundation.`,
+          `Your results look solid on ${topicsAlreadyStrong.length} topics, but ` +
+          `${topicsNeedingReview.length} topics need a refresher. Starting in ` +
+          `${({algebraCalcFocused: "Algebra I & II", generalAdvancedFoundations: "Mathematical Foundations", precalculus: "Pre-Calculus"} as Partial<Record<MathTrackName,string>>)[firstWeakSpot.course] ?? firstWeakSpot.course} will close the earliest gap first so nothing later builds on a shaky foundation.`,
       }
     : {
         recommendedStartingCourse: "calculus1",

@@ -9,6 +9,11 @@ import { recordDiagnosticResults } from "@/lib/progress/studentProgressStore";
 import { DiagnosticAnswerRecord } from "@/lib/types/curriculumTypes";
 import { PlacementRecommendation, TopicMasteryResult } from "@/lib/types/curriculumTypes";
 
+function topicLabel(topic: string): string {
+  const words = topic.replace(/([a-z])([A-Z])/g, '$1 $2').toLowerCase();
+  return words.charAt(0).toUpperCase() + words.slice(1);
+}
+
 export function DiagnosticRunner() {
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
   const [selectedChoiceIndex, setSelectedChoiceIndex] = useState<number | null>(null);
@@ -57,8 +62,8 @@ export function DiagnosticRunner() {
             <p className="text-sm font-semibold text-brandInk mb-1">Topics to review:</p>
             <div className="flex flex-wrap gap-1.5">
               {recommendation.topicsToReviewFirst.map((topic) => (
-                <span key={topic} className="text-xs rounded-full bg-amber-50 border border-amber-200 px-2.5 py-1 text-amber-800">
-                  {topic}
+                <span key={topicLabel(topic)} className="text-xs rounded-full bg-amber-50 border border-amber-200 px-2.5 py-1 text-amber-800">
+                  {topicLabel(topic)}
                 </span>
               ))}
             </div>
@@ -70,8 +75,8 @@ export function DiagnosticRunner() {
             <p className="text-sm font-semibold text-brandInk mb-1">Already solid:</p>
             <div className="flex flex-wrap gap-1.5">
               {recommendation.topicsAlreadyStrong.map((topic) => (
-                <span key={topic} className="text-xs rounded-full bg-green-50 border border-green-200 px-2.5 py-1 text-brandSuccess">
-                  {topic}
+                <span key={topicLabel(topic)} className="text-xs rounded-full bg-green-50 border border-green-200 px-2.5 py-1 text-brandSuccess">
+                  {topicLabel(topic)}
                 </span>
               ))}
             </div>

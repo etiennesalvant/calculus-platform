@@ -13,6 +13,7 @@ export default function DashboardPage() {
   const placement = progress.latestPlacementRecommendation;
   const start = placement ? Math.max(0, lessons.findIndex(l => l.course.courseSlug === placement.recommendedStartingCourse && l.unit.unitSlug === placement.recommendedStartingUnit)) : 0;
   const next = lessons.slice(start).find(l => !done.has(`${l.course.courseSlug}/${l.unit.unitSlug}/${l.lesson.lessonSlug}`)) ?? lessons.find(l => !done.has(`${l.course.courseSlug}/${l.unit.unitSlug}/${l.lesson.lessonSlug}`));
+  const streak = calculateCurrentStudyStreakInDays(progress);
   const minutes = progress.studyDays.find(d => d.isoDate === localDateKey())?.minutesStudied ?? 0;
   const sample = lessons.find(l => l.course.courseSlug === 'calculus1')!;
   const href = (item: typeof sample) => `/lesson/${item.course.courseSlug}/${item.unit.unitSlug}/${item.lesson.lessonSlug}`;
@@ -27,7 +28,7 @@ export default function DashboardPage() {
     </section>
     <div className="grid grid-cols-3 border-y border-slate-200 py-5 mb-8 gap-3">
       <div><p className="text-2xl editorial">{done.size}<span className="text-sm text-slate-500"> / {lessons.length}</span></p><p className="text-xs text-slate-500 mt-1">Lessons completed</p></div>
-      <div><p className="text-2xl editorial">{calculateCurrentStudyStreakInDays(progress)} <span className="text-sm text-slate-500">days</span></p><p className="text-xs text-slate-500 mt-1">Study streak</p></div>
+      <div><p className="text-2xl editorial">{streak} <span className="text-sm text-slate-500">{streak === 1 ? "day" : "days"}</span></p><p className="text-xs text-slate-500 mt-1">Study streak</p></div>
       <div><p className="text-2xl editorial">{minutes}<span className="text-sm text-slate-500"> / {progress.dailyStudyGoalMinutes} min</span></p><label className="text-xs text-slate-500">Daily goal <select aria-label="Daily study goal" value={progress.dailyStudyGoalMinutes} onChange={e => setProgress(setDailyStudyGoal(Number(e.target.value)))} className="bg-transparent text-xs ml-1"><option value="15">15 min</option><option value="30">30 min</option><option value="60">60 min</option><option value="150">150 min</option></select></label></div>
     </div>
     <div className="flex items-end justify-between gap-4 mb-5"><div><p className="text-xs uppercase tracking-widest text-slate-500 mb-1">The curriculum</p><h2 className="text-3xl">Choose your next chapter.</h2></div><Link href={href(sample)} className="text-xs text-brandAccent underline">Try a calculus lesson</Link></div>
